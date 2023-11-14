@@ -60,7 +60,6 @@ function Project(){
     return(
         <div className={styles.project_container}>
             <HorarioReal/>
-            <LinkButton to={'/'} text='Sair'/>
             <div className={styles.title_container}>
                 <LinkButton to='/newProject' text='Adicionar Horario'/>
                 <h1>Alarmes</h1>

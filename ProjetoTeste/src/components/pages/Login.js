@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import Project from './Project';
-import Input from './../form/Input';
 import styles from './Login.module.css'
-import Submit from '../form/Submit';
 import {VscKey, VscAccount} from 'react-icons/vsc'
 import { useNavigate } from 'react-router-dom';
-const Login = () => {
+import Container from '../layouts/Container';
+function Login(){
  
     const navigate = useNavigate()
     const [username, setUsername] = useState();
@@ -17,13 +15,15 @@ const Login = () => {
         console.log('Usuario e senha corretos')
         console.log({username},{password})
         navigate("/projects")
+        
       } else {
         alert('Credenciais inválidas');
       }
     }
     return (
       <>
-        <div className={styles.container}>
+      <Container customClass='min-heigth'>
+      <div className={styles.container}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <h2 className={styles.tituloLogin}>Login</h2>
                   <div className={styles.campo}>
@@ -40,6 +40,8 @@ const Login = () => {
 
           
         </div>
+      </Container>
+        
       </>
     );
   };

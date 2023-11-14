@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 
 import styles from './ProjectCard.module.css'
-import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
+import {BsPencil, BsFillTrashFill, BsTypeH1} from 'react-icons/bs'
 import Loading from '../layouts/Loading'
 import Projeto from '../pages/Projeto'
 import {useState} from 'react'
-import Project from './../pages/Project';
+import Confirmacao from '../layouts/Confirmacao'
 
 function ProjectCard({id, time, handleRemove}){
     
@@ -13,13 +13,22 @@ function ProjectCard({id, time, handleRemove}){
         e.preventDefault()
         handleRemove(id)
     }
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalEditOpen, setIsModalEditOpen] = useState(false);
 
-    const openModal = () => {
-      setIsModalOpen(true);
+    const openModalEdit = () => {
+      setIsModalEditOpen(true);
     };
-    function closeModal(){
-        setIsModalOpen(false);
+    function closeModalEdit(){
+        setIsModalEditOpen(false);
+    }
+
+    const [isModalConfOpen, setIsModalConfOpen] = useState(false);
+
+    const openModalConf = () => {
+      setIsModalConfOpen(true);
+    };
+    function closeModalConf(){
+        setIsModalConfOpen(false);
     }
     
     
@@ -27,18 +36,18 @@ function ProjectCard({id, time, handleRemove}){
         <>
             
             <div className={styles.project_card}>
-                <Projeto isOpen={isModalOpen} onClose={closeModal} id={id}/>
-                <p  className={styles.category_text}>
-                    {time}
-                </p>
-                <div className={styles.project_card_actions}>
-                    <button onClick={openModal}>
-                        <BsPencil/> Editar
-                        
-                    </button>
-                    
+                <Projeto isOpen={isModalEditOpen} onClose={closeModalEdit} id={id}/>
 
-                    <button onClick={remove}>
+                <Confirmacao isOpen={isModalConfOpen} onClose={closeModalConf} onConfirm={remove} text={"Deseja excluir o horário?"}/>
+                
+                <h1  className={styles.category_text}>
+                    {time}
+                </h1>
+                <div className={styles.project_card_actions}>
+                    <button onClick={openModalEdit} className={styles.button_edit}>
+                        <BsPencil/> Editar     
+                    </button>
+                    <button onClick={openModalConf} className={styles.button_remove}>
                         <BsFillTrashFill/> Excluir
                     </button>
                 </div>

@@ -1,11 +1,7 @@
-import {parse, v4 as uuidv4} from 'uuid'
 
 import styles from './Projeto.module.css'
-import { useParams } from 'react-router-dom'
 import {useState, useEffect} from 'react'
-import Loading from '../layouts/Loading'
 import ProjectForm from '../project/ProjectForm'
-import Message from '../layouts/Message'
 
 function Projeto({isOpen, onClose, id}){
     const [project, setProject] = useState([]) 
@@ -58,9 +54,7 @@ function Projeto({isOpen, onClose, id}){
                 <div className={styles.modal}>
                 
                 <div>
-                    
                     <ProjectForm handleSubmit={editPost} projectdate={project}/>
-                    
                 </div>
                 
                 </div>
