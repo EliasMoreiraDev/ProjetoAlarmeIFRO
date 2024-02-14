@@ -4,7 +4,8 @@ import ProjectForm from '../project/ProjectForm'
 
 import { useNavigate } from 'react-router-dom'
 
-function NewProject(){
+
+function NewProject({ isOpen, onClose }){
 
     const history = useNavigate()
 
@@ -20,15 +21,21 @@ function NewProject(){
         }).then(resp => resp.json())
         .then((data)=>{
             console.log(data)
+            window.location.reload();
             history('/projects', { state: { message: 'Projeto criado com sucesso!'}})
         })
         .catch(erro => console.log(erro))
+        
     }
+    if (!isOpen) return null;
     return(
         <div className={styles.caixa_newProject}>
-            <h1>Criar Projeto</h1>
-            <p>Crie seu projeto para depois adicionar os serviços</p>
-            <ProjectForm handleSubmit={createPost} textobtn='Criar projeto'/>
+            <div className={styles.modal_overlay}>
+                <div className={styles.modal}>
+                    <h1 className={styles.titulo}>Criar Alarme</h1>
+                    <ProjectForm handleSubmit={createPost} onClose={onClose} textobtn='Criar projeto'/>
+                </div>
+            </div>
         </div>
     )
 }

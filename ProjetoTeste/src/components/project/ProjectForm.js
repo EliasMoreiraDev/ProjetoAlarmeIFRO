@@ -15,21 +15,20 @@ function ProjectForm({handleSubmit,textobtn, projectdate, onClose}){
     const submit =(e) =>{
         e.preventDefault()
         handleSubmit(project)
+        onClose()
     }
     function handleChange(e){
         setProject({...project, 
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            ativo: false
         })
-
     }
-
-
     return(
-        <form onSubmit={submit}>
+        <form>
             <Input type='time' text='Hora do Alarme' name='time' handleOnChange={handleChange}/> 
             <div className={styles.container_btn}>
                 <Submit text="Cancelar" onClick={onClose} style={SubmitStyles.btn_cancelar}/>
-                <Submit text="Confirmar" style={SubmitStyles.btn_confirmar}/>
+                <Submit text="Confirmar" onClick={submit} style={SubmitStyles.btn_confirmar}/>
                 
             </div> 
             

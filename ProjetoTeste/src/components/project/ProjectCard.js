@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
 
 import styles from './ProjectCard.module.css'
-import {BsPencil, BsFillTrashFill, BsTypeH1} from 'react-icons/bs'
-import Loading from '../layouts/Loading'
+import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
+import ToggleSwitch from '../layouts/ToggleSwitch'
 import Projeto from '../pages/Projeto'
 import {useState} from 'react'
 import Confirmacao from '../layouts/Confirmacao'
+
 
 function ProjectCard({id, time, handleRemove}){
     
@@ -33,13 +33,15 @@ function ProjectCard({id, time, handleRemove}){
     
     
     return(
-        <>
-            
-            <div className={styles.project_card}>
-                <Projeto isOpen={isModalEditOpen} onClose={closeModalEdit} id={id}/>
+        <div className={styles.container_card}>
 
-                <Confirmacao isOpen={isModalConfOpen} onClose={closeModalConf} onConfirm={remove} text={"Deseja excluir o horário?"}/>
-                
+            <Projeto isOpen={isModalEditOpen} onClose={closeModalEdit} id={id}/>
+
+            <Confirmacao isOpen={isModalConfOpen} onClose={closeModalConf} onConfirm={remove} text={"Deseja excluir o horário?"}/>
+            <div className={styles.project_card}>
+
+                 <ToggleSwitch id={id}/> 
+
                 <h1  className={styles.category_text}>
                     {time}
                 </h1>
@@ -51,8 +53,10 @@ function ProjectCard({id, time, handleRemove}){
                         <BsFillTrashFill/> Excluir
                     </button>
                 </div>
+                
             </div>
-        </>
+            
+        </div>
         
     )
 }

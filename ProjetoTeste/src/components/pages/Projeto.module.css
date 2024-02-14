@@ -5,6 +5,7 @@
     --azul: #3382c1;
   }
 
+
 .project_details{
     padding: 2em;
     width: 100vw;
@@ -48,6 +49,7 @@
     cursor: pointer;
     border: none;
     max-height: 40px;
+    
 }
 .btn:hover{
     background-color: #005aa3;

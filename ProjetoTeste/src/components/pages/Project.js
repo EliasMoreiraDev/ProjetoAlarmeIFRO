@@ -4,16 +4,15 @@ import {useState,useEffect} from 'react'
 import Message from "../layouts/Message"
 import styles from './Project.module.css'
 import Container from '../layouts/Container'
-import LinkButton from '../layouts/LinkButton'
 import ProjectCard from "../project/ProjectCard"
 import Loading from "../layouts/Loading"
 import NoProjects from "../layouts/NoProjects"
 import HorarioReal from "../layouts/HorarioReal"
- 
-
+import NewProject from "./NewProject"
+import Confirmacao from "../layouts/Confirmacao"
+import DiasDeAlarme from "../layouts/DiasDeAlarme"
+import BotaoSalvarArduino from "../layouts/BotaoSalavarArduino"
 function Project(){
-
-   
         const [projects, setProjects] = useState([])
         const [removeLoading, setRemoveLoading] = useState(false)
         const [projectMessage, setProjectMessage] = useState('')
@@ -57,11 +56,36 @@ function Project(){
             })
             .catch(erro => console.log(erro))
         }
+    const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+
+    const openModalAdd = () => {
+      setIsModalAddOpen(true)
+    }
+    function closeModalAdd(){
+        setIsModalAddOpen(false);
+    }
+    const [isModalConfOpen, setIsModalConfOpen] = useState(false);
+
+    const openModalConf = () => {
+      setIsModalConfOpen(true);
+    };
+    function closeModalConf(){
+        setIsModalConfOpen(false);
+    }
     return(
         <div className={styles.project_container}>
             <HorarioReal/>
+            <NewProject onClose={closeModalAdd} isOpen={isModalAddOpen}/>
+            
+            {/*onConfirm deve ser substituido pela ação de tocar a sirene*/}
+            <Confirmacao isOpen={isModalConfOpen} onClose={closeModalConf} onConfirm={closeModalConf} text={"Deseja tocar a sirene agora?"}/>
+
             <div className={styles.title_container}>
-                <LinkButton to='/newProject' text='Adicionar Horario'/>
+                <div className={styles.caixaBotoes}>
+                    <button className={styles.botaoCriar} onClick={openModalAdd}>Adicionar Horario</button>
+                    <button className={styles.botaoTocarAgora} onClick={openModalConf}>Tocar Agora</button>
+                </div>
+                <DiasDeAlarme/>
                 <h1>Alarmes</h1>
             </div>
             
@@ -71,10 +95,11 @@ function Project(){
             {projectMessage && 
                 <Message type='success' msg={projectMessage}/>
             }
-            <Container customClass='start'>
+            <Container customClass='column'>
                 {projects.length > 0 &&
                     projects.map((project) => (
-                        <ProjectCard time={project.time} id={project.id} key={project.id} handleRemove={removeProject}/>
+                        <ProjectCard id={project.id} key={project.id}  time={project.time}  handleRemove={removeProject}/>
+                        
                     ))}
 
                     {!removeLoading && <Loading/>}
@@ -83,6 +108,7 @@ function Project(){
                         <NoProjects/>
                     )}
             </Container>
+            <BotaoSalvarArduino/>
         </div>
     )
 }

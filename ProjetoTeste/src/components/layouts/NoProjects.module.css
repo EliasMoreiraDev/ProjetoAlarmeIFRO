@@ -1,22 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-@media screen and (min-width: 699px){
+
     .container_text{
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, 250%);
+        transform: translate(-50%, 600%);
         text-align: center;
     }
-}
-@media screen and (max-width: 698px){
-    .container_text{
-        position: absolute;
-        left: 50%;
-        top: 60%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-}
+
+
 
 
 .container_text h2{

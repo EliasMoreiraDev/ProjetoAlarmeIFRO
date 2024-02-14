@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import ProjectForm from '../project/ProjectForm'
 
 function Projeto({isOpen, onClose, id}){
-    const [project, setProject] = useState([]) 
+    const [project,   setProject] = useState([]) 
     const [message, setMessage] = useState()
     const [type, setType] = useState()
 
@@ -41,8 +41,9 @@ function Projeto({isOpen, onClose, id}){
         .then((data) => {
             window.location.reload();
             setProject(data)
-            setMessage('Projeto atualizado!')
+            
             setType('success')
+            setMessage('Projeto atualizado!')
             onClose()
         })
         .catch(erro => console.log(erro))
